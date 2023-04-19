@@ -6,8 +6,7 @@ def get_mac_address():
         if interface == "Wi-Fi":
             for addr in addrs:
                 if addr.family == psutil.AF_LINK:
-                    mac = addr.address
-                    return mac
+                    return addr.address
 
 def machineinfo():
 
